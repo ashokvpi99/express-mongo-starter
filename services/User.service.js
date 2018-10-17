@@ -1,4 +1,4 @@
-var User = require('../models/User.model');
+var User = require('../models/Users.model');
 
 exports.getAlluser = (req, res ,next) => {
     User.find({}).sort({name: 1}).exec((err, data) => {

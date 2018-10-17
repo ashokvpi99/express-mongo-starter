@@ -6,7 +6,7 @@ var userSchema   = new Schema({
     mobileNo: { type: Number },
     email: String,
     createdDate: { type: Date, default: Date.now },
-    updatedDate: { type: Date, default: null }
-}, { collection: 'User' });
+    updatedDate: { type: Date, default: Date.now }
+}, { collection: 'Users' });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Users', userSchema);

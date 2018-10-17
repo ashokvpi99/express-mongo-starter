@@ -1,1 +1,3 @@
-exports.User = require('./User.model')
+require('./Users.model.js');
+require('./Stores.model');
+
