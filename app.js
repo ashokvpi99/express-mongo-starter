@@ -6,7 +6,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser')
 const port = 3002
 const mongoose = require('mongoose');
-var fs =require('fs');
+var fs = require('fs');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const cros = require('cors');
@@ -18,39 +18,54 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+//
 
+//Mongoose model index initialization
 require('./models/index');
+//
 
-mongoose.connect('mongodb://localhost:27017/demo', (err) => {
+//Mongoose Connection
+mongoose.connect('mongodb://localhost:27017/demo', { useNewUrlParser: true }, (err) => {
   if(err)
     console.error('Error while connecting: ', err);
 })
+//
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
+//
  
-// parse application/json
+// parse application/json & Cookie Parser
 app.use(bodyParser.json())
-
-app.use(cros())
-
-// create a write stream (in append mode)
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
- 
-// setup the logger
-app.use(logger('combined', { stream: accessLogStream }))
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+//
 
+//Cross-origin Setup
+app.use(cros())
+//
+
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+//
+ 
+// setup the logger
+app.use(logger('combined', { stream: accessLogStream }))
+app.use(logger('combined'))
+//
+
+//API Index
 app.use('/api', indexRouter);
+//
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+//
 
+//Cluster Setup
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
 
@@ -70,6 +85,7 @@ if (cluster.isMaster) {
 }
 
 console.log(`Worker ${process.pid} started`);
+//
 
 // error handler
 app.use(function(err, req, res, next) {
