@@ -12,7 +12,7 @@ exports.getAllStores = (req, res) => {
 }
 
 exports.getStoreById = (req, res) => {
-    store.findById(req.params.id).populate('owner').exec((err, response) => {
+    store.findById(req.params.id).exec((err, response) => {
         if (err)
             res.status(400).send({ success: false, error: err, message: 'Get Store By Id Failed' });
         else
@@ -21,10 +21,7 @@ exports.getStoreById = (req, res) => {
 }
 
 exports.saveStore = (req, res) => {
-    var body = req.body;
-    if (body && body.owner)
-        body.owner = ObjectId(body.owner)
-    var storeObj = new store(body);
+    var storeObj = new store(req.body);
     storeObj.save((err, status) => {
         if (err)
             res.status(400).send({ success: false, error: err, message: 'Save Store Failed' });
@@ -45,7 +42,7 @@ exports.updateStoreById = (req, res) => {
     })
 }
 
-exports.deleteUserById = (req, res) => {
+exports.deleteStoreById = (req, res) => {
     store.findByIdAndRemove(req.params.id, (err, response) => {
         if (err)
             res.status(400).send({ success: false, error: err, message: 'Delete Store Failed' });

@@ -1,7 +1,7 @@
 var User = require('../models/Users.model');
 
 exports.getAlluser = (req, res ,next) => {
-    User.find({}).sort({name: 1}).exec((err, data) => {
+    User.find({}).exec((err, data) => {
         if(err)
             res.status(400).send({success: false, message: 'Failed to get User'})
         else 
@@ -29,8 +29,6 @@ exports.saveUser = (req, res ,next) => {
 }
 
 exports.updateUser = (req, res ,next) => {
-    if(req.body)
-        req.body.updatedDate = new Date();
     User.findByIdAndUpdate({_id: req.params.id}, req.body).exec((err, data) => {
         if(err)
             res.status(400).send({success: false, message: 'Failed to Update User'})
