@@ -11,7 +11,7 @@ var StoreController = require('../../services/Stores.service');
 var body = {"_id":"5bc7144afc5b274512e913b5","storeName":"aaa","storeAddress":"Nelson Manikam Road","storeEmail":"aaa@gmail.com","owner":"5bc70ae537984e37a389b928","storeContactNo":9854812342,"createdDate":"2018-10-17T10:51:54.150Z","updatedDate":"2018-10-17T10:51:54.150Z"};
 
 
-describe('--------------- GET ALL STORES ---------------', function () {
+describe('--------------- STORE SERVICES ---------------', function () {
     it('Get all stores', function () {
 
         let req = {}, res = {};
@@ -26,9 +26,6 @@ describe('--------------- GET ALL STORES ---------------', function () {
         storeMock.restore();
     });
 
-});
-
-describe('--------------- GET STORE BY ID ---------------', function () {
     it('Get store by id', function () {
 
         let req = {
@@ -46,9 +43,6 @@ describe('--------------- GET STORE BY ID ---------------', function () {
         storeMock.restore();
     });
 
-});
-
-describe('--------------- GET STORE BY USER ---------------', function () {
     it('Get store by user', function () {
 
         let req = {
@@ -67,9 +61,6 @@ describe('--------------- GET STORE BY USER ---------------', function () {
         UserMock.restore();
     });
 
-});
-
-describe('--------------- DELETE STORE BY ID---------------', function () {
     it('Delete store by id', function () {
 
         let req = {
@@ -86,9 +77,6 @@ describe('--------------- DELETE STORE BY ID---------------', function () {
         storeMock.restore();
     });
 
-});
-
-describe('--------------- UPDATE STORE BY ID---------------', function () {
     it('Update Store by id', function () {
 
         let req = {
