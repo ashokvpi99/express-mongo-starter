@@ -32,8 +32,6 @@ exports.saveStore = (req, res) => {
 
 exports.updateStoreById = (req, res) => {
     var updateObj = req.body;
-    if (updateObj && updateObj.owner)
-        updateObj.owner = ObjectId(updateObj.owner)
     store.findByIdAndUpdate(req.params.id, updateObj, (err, response) => {
         if (err)
             res.status(400).send({ success: false, error: err, message: 'Update Store Failed' });
